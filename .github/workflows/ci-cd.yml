@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DOCKER_IMAGE_BACKEND: sarang033/expense-backend  # Docker Hub backend image
-      DOCKER_IMAGE_FRONTEND: sarang033/expense-frontend  # Docker Hub frontend image
+      DOCKER_IMAGE_BACKEND: sarang033/expense-backend  
+      DOCKER_IMAGE_FRONTEND: sarang033/expense-frontend  # Replace with your Docker Hub username and frontend image name
       EC2_HOST: ${{ secrets.EC2_HOST }}  # Use secret for EC2 instance public IP address
       EC2_USER: ${{ secrets.EC2_USER }}  # Use secret for EC2 username
 
