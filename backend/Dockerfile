@@ -8,7 +8,4 @@ RUN npm install
 
 COPY . .
 
-# Copy the .env file
-COPY .env .env
-
 CMD ["node", "server.js"]
