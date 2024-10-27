@@ -21,3 +21,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 3000
 EXPOSE 3000
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

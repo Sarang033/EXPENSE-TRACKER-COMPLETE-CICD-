@@ -63,3 +63,12 @@ jobs:
             
             # Start new containers
             docker-compose -f ~/docker-compose.yml up -d
+            
+            # Check if containers are running
+            docker ps
+            
+            # Display logs if frontend container is not running
+            if ! docker ps | grep -q frontend; then
+              echo "Frontend container is not running. Displaying logs:"
+              docker-compose -f ~/docker-compose.yml logs frontend
+            fi
