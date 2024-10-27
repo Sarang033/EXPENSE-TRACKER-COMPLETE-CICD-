@@ -10,9 +10,9 @@ const app = express();
 
 
 app.use(cors({
-  origin: 'http://15.206.147.253:3000', // Allow only your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  origin: 'http://15.206.147.253:3000', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
 

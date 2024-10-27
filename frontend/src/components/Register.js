@@ -13,6 +13,8 @@ function Register() {
 
   const { username, email, password, password2 } = formData;
 
+  const [emailError, setEmailError] = useState('');
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,11 +24,9 @@ function Register() {
     if (isError && message) {
       console.error(message);
     }
-
     if (isSuccess && user) {
       navigate('/dashboard');
     }
-
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
@@ -35,6 +35,16 @@ function Register() {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+
+    // Reset email error on change
+    if (e.target.name === 'email') {
+      setEmailError('');
+    }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return emailRegex.test(email);
   };
 
   const onSubmit = (e) => {
@@ -42,6 +52,8 @@ function Register() {
 
     if (password !== password2) {
       console.error('Passwords do not match');
+    } else if (!validateEmail(email)) {
+      setEmailError('Please add a valid email');
     } else {
       const userData = {
         username,
@@ -64,6 +76,11 @@ function Register() {
         {message && (
           <div className={`p-4 mb-4 text-sm rounded-lg ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`} role="alert">
             {message}
+          </div>
+        )}
+        {emailError && (
+          <div className="p-4 mb-4 text-sm bg-red-100 text-red-700 rounded-lg" role="alert">
+            {emailError}
           </div>
         )}
         <form onSubmit={onSubmit} className="space-y-4">
