@@ -16,7 +16,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://sarangchamp2004:Ic5n6vvFTRECBsFU@auth.m6sik.mongodb.net/Auth?retryWrites=true&w=majority&appName=Auth")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('MongoDB connection error:', err));
 
