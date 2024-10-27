@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DOCKER_IMAGE_BACKEND: sarang033/expense-backend  
-      DOCKER_IMAGE_FRONTEND: sarang033/expense-frontend  # Replace with your Docker Hub username and frontend image name
-      EC2_HOST: 15.206.147.253  # Replace with your EC2 instance public IP address
-      EC2_USER: ubuntu
+      DOCKER_IMAGE_BACKEND: sarang033/expense-backend  # Docker Hub backend image
+      DOCKER_IMAGE_FRONTEND: sarang033/expense-frontend  # Docker Hub frontend image
+      EC2_HOST: ${{ secrets.EC2_HOST }}  # Use secret for EC2 instance public IP address
+      EC2_USER: ${{ secrets.EC2_USER }}  # Use secret for EC2 username
 
     steps:
       # Checkout the code
@@ -34,22 +34,26 @@ jobs:
       # Build and push backend Docker image
       - name: Build and push backend image
         run: |
-          docker build -t $DOCKER_IMAGE_BACKEND --build-arg MONGO_URI=${{ secrets.MONGO_URI }} --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} -f backend/Dockerfile ./backend
+          docker build -t $DOCKER_IMAGE_BACKEND \
+            --build-arg MONGO_URI=${{ secrets.MONGO_URI }} \
+            --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
+            -f backend/Dockerfile ./backend
           docker push $DOCKER_IMAGE_BACKEND
 
       # Build and push frontend Docker image
       - name: Build and push frontend image
         run: |
-          docker build -t $DOCKER_IMAGE_FRONTEND -f frontend/Dockerfile ./frontend
+          docker build -t $DOCKER_IMAGE_FRONTEND \
+            -f frontend/Dockerfile ./frontend
           docker push $DOCKER_IMAGE_FRONTEND
 
       # SSH into EC2 and deploy
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v0.1.5
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          host: ${{ secrets.EC2_HOST }}  # Use secret for EC2 host
+          username: ${{ secrets.EC2_USER }}  # Use secret for EC2 username
+          key: ${{ secrets.EC2_SSH_KEY }}  # SSH key for authentication
           script: |
             # Pull the latest Docker images
             docker pull $DOCKER_IMAGE_BACKEND
