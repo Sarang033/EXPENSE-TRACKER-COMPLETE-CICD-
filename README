@@ -2,7 +2,7 @@
 
 This project demonstrates a CI/CD pipeline for a MERN (MongoDB, Express, React, Node.js) stack application, deploying to an AWS EC2 instance using GitHub Actions.
 
-![CI-CD WORKFLOW](./images/CI-CD.png)
+![CI-CD WORKFLOW](/images/CI-CD.png)
 
 ## Project Structure
 project-root/
