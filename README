@@ -1,0 +1,80 @@
+# MERN Stack CI/CD Project
+
+This project demonstrates a CI/CD pipeline for a MERN (MongoDB, Express, React, Node.js) stack application, deploying to an AWS EC2 instance using GitHub Actions.
+
+## Project Structure
+project-root/
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── Dockerfile
+│   └── nginx.conf
+├── backend/
+│   ├── src/
+│   └── Dockerfile
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+└── docker-compose.yml
+
+
+## Prerequisites
+
+- GitHub account
+- AWS account
+- Docker Hub account
+- EC2 instance running
+- MongoDB database (can be local or cloud-based like MongoDB Atlas)
+
+## Setup Instructions
+
+1. Clone this repository to your local machine.
+
+2. Set up your EC2 instance:
+   - Launch an EC2 instance on AWS
+   - Configure security groups to allow inbound traffic on ports 22 (SSH), 80 (HTTP), 3000 (Frontend), and 5001 (Backend)
+   - Install Docker and Docker Compose on the EC2 instance
+
+3. Configure GitHub Secrets:
+   In your GitHub repository, go to Settings > Secrets and variables > Actions and add the following secrets:
+   - `AWS_ACCESS_KEY_ID`: Your AWS access key
+   - `AWS_SECRET_ACCESS_KEY`: Your AWS secret key
+   - `EC2_HOST`: Your EC2 instance's public IP or DNS
+   - `EC2_USERNAME`: The username for your EC2 instance (e.g., 'ubuntu')
+   - `EC2_SSH_KEY`: The private SSH key for accessing your EC2 instance
+   - `DOCKER_HUB_USERNAME`: Your Docker Hub username
+   - `DOCKER_HUB_ACCESS_TOKEN`: Your Docker Hub access token
+   - `MONGO_URI`: Your MongoDB connection string
+   - `JWT_SECRET`: A secret key for JWT token generation
+
+4. Update the `deploy.yml` file in the `.github/workflows/` directory with your specific configuration if needed.
+
+5. Push your code to the main branch of your GitHub repository to trigger the CI/CD pipeline.
+
+## CI/CD Pipeline
+
+The CI/CD pipeline is defined in the `.github/workflows/deploy.yml` file and consists of the following steps:
+
+1. Checkout the code
+2. Configure AWS credentials
+3. Login to Docker Hub
+4. Build and push Docker images for frontend and backend
+5. Deploy to EC2 instance
+6. Update Nginx configuration
+
+## Deployment
+
+The application is deployed using Docker containers:
+
+- Frontend: Runs on port 3000
+- Backend: Runs on port 5001
+- Nginx: Acts as a reverse proxy, listening on port 80
+
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
