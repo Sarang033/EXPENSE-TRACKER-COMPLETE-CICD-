@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useRouter } from 'next/navigation'
+import { useNavigate } from 'react-router-dom'  // Updated import
 import { register, reset } from '../store/authSlice'
 
 export default function Register() {
@@ -15,8 +15,8 @@ export default function Register() {
 
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  
-  const router = useRouter()
+
+  const navigate = useNavigate()  // Updated to useNavigate
   const dispatch = useDispatch()
 
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
@@ -26,10 +26,10 @@ export default function Register() {
       console.error(message)
     }
     if (isSuccess && user) {
-      router.push('/dashboard')
+      navigate('/dashboard')  // Updated to navigate
     }
     dispatch(reset())
-  }, [user, isError, isSuccess, message, router, dispatch])
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {
     setFormData((prevState) => ({
