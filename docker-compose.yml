@@ -1,0 +1,19 @@
+version: '3'
+services:
+  backend:
+    image: your-dockerhub-username/backend
+    container_name: backend
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+
+  frontend:
+    image: your-dockerhub-username/frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+

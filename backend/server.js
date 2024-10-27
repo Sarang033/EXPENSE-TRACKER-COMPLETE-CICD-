@@ -10,7 +10,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: 'https://expense-tracker-cicd.vercel.app' 
+  "origin":"*"
 }));
 app.use(express.json());
 
