@@ -2,6 +2,8 @@
 
 This project demonstrates a CI/CD pipeline for a MERN (MongoDB, Express, React, Node.js) stack application, deploying to an AWS EC2 instance using GitHub Actions.
 
+![CI-CD WORKFLOW](./images/CI-CD.png)
+
 ## Project Structure
 project-root/
 ├── frontend/
@@ -69,6 +71,7 @@ The application is deployed using Docker containers:
 - Frontend: Runs on port 3000
 - Backend: Runs on port 5001
 - Nginx: Acts as a reverse proxy, listening on port 80
+
 
 ## License
 
