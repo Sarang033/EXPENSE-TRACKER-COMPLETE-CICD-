@@ -5,6 +5,8 @@ services:
     container_name: backend
     ports:
       - "5001:5001"
+    environment:
+      - PORT=5001
 
   frontend:
     image: sarang033/expense-frontend
