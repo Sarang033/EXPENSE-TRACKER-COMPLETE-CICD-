@@ -1,16 +1,15 @@
 version: '3'
 services:
   backend:
-    image: your-dockerhub-username/backend
+    image: sarang033/expense-backend
     container_name: backend
     ports:
       - "5001:5001"
 
   frontend:
-    image: your-dockerhub-username/frontend
+    image: sarang033/expense-frontend
     container_name: frontend
     ports:
       - "3000:3000"
     depends_on:
       - backend
-
