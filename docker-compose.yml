@@ -5,9 +5,6 @@ services:
     container_name: backend
     ports:
       - "5001:5001"
-    environment:
-      - MONGO_URI=${MONGO_URI}
-      - JWT_SECRET=${JWT_SECRET}
 
   frontend:
     image: your-dockerhub-username/frontend

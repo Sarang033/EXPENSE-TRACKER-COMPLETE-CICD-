@@ -34,17 +34,13 @@ jobs:
       # Build and push backend Docker image
       - name: Build and push backend image
         run: |
-          docker build -t $DOCKER_IMAGE_BACKEND \
-            --build-arg MONGO_URI=${{ secrets.MONGO_URI }} \
-            --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
-            -f backend/Dockerfile ./backend
+          docker build -t $DOCKER_IMAGE_BACKEND -f backend/Dockerfile ./backend
           docker push $DOCKER_IMAGE_BACKEND
 
       # Build and push frontend Docker image
       - name: Build and push frontend image
         run: |
-          docker build -t $DOCKER_IMAGE_FRONTEND \
-            -f frontend/Dockerfile ./frontend
+          docker build -t $DOCKER_IMAGE_FRONTEND -f frontend/Dockerfile ./frontend
           docker push $DOCKER_IMAGE_FRONTEND
 
       # SSH into EC2 and deploy

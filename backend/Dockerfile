@@ -14,11 +14,5 @@ COPY . .
 # Expose port 5001
 EXPOSE 5001
 
-# Set environment variables for MongoDB URI and JWT secret (to be passed during build)
-ARG MONGO_URI
-ARG JWT_SECRET
-ENV MONGO_URI=${MONGO_URI}
-ENV JWT_SECRET=${JWT_SECRET}
-
 # Start the server
 CMD ["npm", "start"]
